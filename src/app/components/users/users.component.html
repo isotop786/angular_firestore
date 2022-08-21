@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row my-3">
+    <button class="btn btn-dark mb-3" (click)="showUserForm =!showUserForm">
+     <span  *ngIf="showUserForm; else addUser">Hide Form</span>
+     <ng-template #addUser>Add User</ng-template>
+    </button>
+  </div>
+
+  <div *ngIf="showUserForm" class="row p-2 my-3" style="display: flex; justify-content:center; align-items:center;">
+      <div class="col-md-6 ">
+        <div class="card card-default bg-light" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+          <div class="card-header">
+            <h5 style="font-weight:300;">Add New User</h5>
+          </div>
+          <div class="card-body">
+            <form #userForm="ngForm"  (ngSubmit)="onSubmit(userForm)">
+            <div class="form-group">
+              <label for="">First Name</label>
+              <input type="text" class="form-control"
+              [(ngModel)]="user.firstName"
+              name="firstName"
+              #userFirstName="ngModel"
+              required
+              minlength="2"
+              maxlength="10"
+              [ngClass]="{'is-invalid' : userFirstName.touched && userFirstName.errors}"
+              >
+              <div [hidden]="!userFirstName.errors?.['required']" class="invalid-feedback">
+                  First name must be filled.
+              </div>
+              <div [hidden]="!userFirstName.errors?.['minlength']" class="invalid-feedback">
+                  Must be at least 2 charcters.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">Last Name</label>
+              <input type="text" name="lastName" class="form-control" id=""
+              [(ngModel)]="user.lastName"
+              #userLastName="ngModel"
+              required
+              minlength="2"
+              [ngClass]="{'is-invalid' : userLastName.errors && userLastName.touched }"
+              >
+              <div [hidden]="!userLastName.errors?.['required']" class="invalid-feedback">
+                Last name must be filled
+              </div>
+              <div [hidden]="!userLastName.errors?.['minlength']" class="invalid-feedback">
+                Last name must be at least 2 characters
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">Email</label>
+              <input type="email" class="form-control" id=""
+              [(ngModel)]="user.email"
+              name="email"
+              #email = "ngModel"
+              required
+              [ngClass]="{'is-invalid':email.errors && email.touched}"
+              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b"
+              >
+              <div [hidden]="!email.errors?.['required']" class="invalid-feedback">
+                Email is required
+              </div>
+              <div [hidden]="!email.errors?.['pattern']" class="invalid-feedback">
+                Must be an valid email.
+              </div>
+            </div>
+
+              <button [disabled]="!userForm.form.valid" class="btn btn-block btn-primary">Add</button>
+
+          </form>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <h2>Users</h2>
+  <ul *ngIf="users.length > 0;else noUsers">
+    <li class="card card-body my-2" *ngFor="let user of users" [class.border-success]="user.isActive">
+
+      <app-user [user]="user" [showExtended]="showExtended"></app-user>
+    </li>
+  </ul>
+</div>
+
+
+<ng-template #noUsers>
+  <h3 style="font-weight: 400;"> No Users found.</h3>
+</ng-template>

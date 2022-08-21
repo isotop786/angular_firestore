@@ -1,0 +1,15 @@
+
+<div class="row">
+  <div [class]="'col-sm-8' ">
+    <div class="d-flex">
+      <h3 >{{user.firstName | uppercase}} {{user.lastName | uppercase}}</h3>
+      <small class="mx-2"><button class="btn btn-sm btn-dark" (click)="toggleHide(user)" [ngClass]="user.hide ? 'fa fa-plus' : 'fa fa-minus'"></button></small>
+    </div>
+  <ul *ngIf="!user.hide" class="list-group" >
+    <li class="list-group-item">Email: {{user.email}}</li>
+    <li class="list-group-item">Balance: {{user.balance | currency:"USD":"symbol"}}</li>
+    <li class="list-group-item">Joined: {{user.registered | date}}</li>
+  </ul>
+  </div>
+
+</div>
