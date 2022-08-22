@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="mb-4">
+    <app-post-form (newPost)="onNewPost($event)"></app-post-form>
+  </div>
+    <ul>
+      <li *ngFor="let post of posts" class="my-2">
+          <app-post [post]="post"></app-post>
+      </li>
+    </ul>
+</div>
+
+

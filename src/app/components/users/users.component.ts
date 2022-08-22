@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/modal/User';
 import { Meta, Title } from '@angular/platform-browser';
 import {NgForm} from '@angular/forms';
-import {DataService} from '../../services/data.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   showUserForm: boolean = false;
   @ViewChild('userForm') form :any;
 
-  constructor(private meta: Meta, private title: Title, private dataService: DataService ) {
+  constructor(private meta: Meta, private title: Title, private userService: UserService ) {
     this.meta.addTags([
       { name: 'description', content: 'Users Page. Listing all users' },
       { name: 'author', content: 'Maruf' },
@@ -42,16 +42,14 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dataService.getUsers().subscribe( users => this.users = users)
+    this.userService.getUsers().subscribe( users => {
+      this.users = users
+      this.loaded = true;
+    })
 
-    this.loaded = true;
 
     this.showExtended = false;
     this.setCurrentClass();
-    // this.addUser({
-    //   firstName:'David',
-    //   lastName:'Jackson'
-    // })
 
     if(this.user.firstName !=='' && this.user.lastName !=='')
     {
@@ -80,7 +78,7 @@ export class UsersComponent implements OnInit {
       value.registered = new Date();
       value.hide = true;
 
-      this.dataService.addUser(value)
+      this.userService.addUser(value)
       this.form.reset();
     }
 
