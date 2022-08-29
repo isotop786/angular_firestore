@@ -4,4 +4,10 @@
             <h4>{{post.title}}</h4>
             <p>{{post.body}}</p>
         </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-between">
+            <button (click)="editPost(post)" class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+            <button  class="btn btn-danger"><i class="fa fa-remove"></i></button>
+          </div>
+        </div>
       </div>

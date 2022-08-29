@@ -13,7 +13,7 @@ const httpOption = {
   providedIn: 'root'
 })
 export class PostService {
-  postURL: string = 'https://jsonplaceholder.typicode.com/posts'
+  postURL: string = 'https://jsonplaceholder.typicode.com/posts/'
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +27,11 @@ export class PostService {
 
   savePost(post: Post):Observable<Post>{
       return this.http.post<Post>(this.postURL, post, httpOption)
+  }
+
+  updatePost(post: Post):Observable<Post>
+  {
+    return this.http.put<Post>(this.postURL+post.id,post, httpOption)
   }
 
 }

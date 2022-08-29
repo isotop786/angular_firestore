@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +12,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,8 @@ import { PostFormComponent } from './components/post-form/post-form.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
