@@ -11,6 +11,7 @@ import { EventEmitter } from '@angular/core';
 export class PostFormComponent implements OnInit {
 
   @Output() newPost : EventEmitter<Post> = new EventEmitter();
+  @Output() editPost: EventEmitter<Boolean> = new EventEmitter();
   @Input() currentPost : Post;
   @Input() isUpdate: boolean;
 
@@ -35,7 +36,7 @@ export class PostFormComponent implements OnInit {
   }
 
   updatePost(){
-    console.log('updating post');
+
     this.postService.updatePost(this.currentPost).subscribe(post=>{
       console.log(post);
       this.currentPost={
@@ -44,6 +45,7 @@ export class PostFormComponent implements OnInit {
         body:''
       }
       this.isUpdate = false;
+      this.editPost.emit(true)
     })
   }
 

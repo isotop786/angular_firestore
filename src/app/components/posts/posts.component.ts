@@ -45,4 +45,17 @@ export class PostsComponent implements OnInit {
     this.isUpdate = true
   }
 
+  public onPostEdit(event)
+  {
+    if(event)
+    {
+      this.isUpdate = false;
+      this.currentPost = {
+        id:0,
+        title:'',
+        body:''
+      }
+    }
+  }
+
 }
