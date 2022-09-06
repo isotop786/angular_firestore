@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterModel } from '../../../modal/RegisterModel';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
+  public registerData: RegisterModel={
+    firstName:'',
+    lastName:'',
+    email:'',
+    password:'',
+    confirm_password:''
+  }
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public register({value, valid}:{value: RegisterModel, valid: boolean}){
+
   }
 
 }
