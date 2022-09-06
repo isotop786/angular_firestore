@@ -29,8 +29,10 @@ export class NavbarComponent implements OnInit {
   }
 
   public logout(){
-    sessionStorage.clear();
-    this.router.navigate(['/login']).then(()=> window.location.reload())
+    if(confirm('Are you sure to logout?')){
+      sessionStorage.clear();
+      this.router.navigate(['/login']).then(()=> window.location.reload())
+    }
   }
 
 }
