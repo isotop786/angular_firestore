@@ -51,7 +51,7 @@ export class AuthService {
 
   verifyToken(token:string) : Observable<TokenVerifyModel>
   {
-    return this.http.post<TokenVerifyModel>(environment.rootURL,{"token":token})
+    return this.http.post<TokenVerifyModel>('http://nodejsbackend-maruf.herokuapp.com/auth/verify/',{"token":token})
   }
 
   isLoggedIn() : boolean {
