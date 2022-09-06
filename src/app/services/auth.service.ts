@@ -4,6 +4,7 @@ import {Observable} from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from '../modal/Token';
 import { TokenVerifyModel } from '../modal/TokenVerifyModel';
+import { Login } from '../modal/Login';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -15,10 +16,33 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class AuthService {
-  private URL: string ="http://nodejsbackend-maruf.herokuapp.com/auth/verify/auth/isauth/"
 
-  constructor(private http : HttpClient) { }
+@Injectable()
+export class AuthService {
+  url : string = "https://nodejsbackend-maruf.herokuapp.com/auth/signin";
+  url_local : string = "http://localhost:5200/auth/signin";
+  private URL: string ="http://nodejsbackend-maruf.herokuapp.com/auth/verify/auth/isauth/"
+  private token: string
+  public isValidToken: boolean = false;;
+
+  constructor(private http : HttpClient) {
+    this.token = sessionStorage.getItem('token')
+
+    this.verifyToken(this.token).subscribe(res=>{
+      if(res.isValidToken){
+        this.isValidToken = true;
+      }else{
+        this.isValidToken = false;
+      }
+    },
+    err=> this.isValidToken = false
+    )
+  }
+
+  login(loginData : Login) : Observable<Login> {
+    return this.http.post<Login>(this.url, loginData, httpOptions )
+  }
+
 
   checkAuthenticatedUser() : Observable<Token>
   {
@@ -30,5 +54,10 @@ export class AuthService {
     return this.http.post<TokenVerifyModel>(environment.rootURL,{"token":token})
   }
 
+  isLoggedIn() : boolean {
+    return !!sessionStorage.getItem('token');
+  }
+
 
 }
+

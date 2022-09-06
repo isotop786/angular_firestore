@@ -1,8 +1,8 @@
 import { Login } from './../../../modal/Login';
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthEmitter } from 'src/app/emitters/AuthEmitter';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
     password:''
   };
   public errorMessage:string='';
+  public authEmitter:AuthEmitter;
 
   constructor(
-    private loginService: LoginService,
     private authService: AuthService,
     private router : Router
     ) { }
@@ -33,14 +33,16 @@ export class LoginComponent implements OnInit {
     }
     else{
       // console.log(value);
-      this.loginService.login(value).subscribe(
+      this.authService.login(value).subscribe(
         res=>{
           sessionStorage.setItem('token',res['token'])
           sessionStorage.setItem('user',res['user'])
+          AuthEmitter.emiiter.emit(true)
 
-          this.router.navigate(['/'])
+          this.router.navigate(['/']).then(()=> window.location.reload())
         },
         err=>{
+          AuthEmitter.emiiter.emit(false)
           console.log('error is : '+err.error.error);
           if(err.error.error ==undefined)
           {
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
           this.errorMessage = err.error.error;
           setTimeout(()=>{
             this.errorMessage ='';
-          },2500)
+          },2000)
         }
       )
     }

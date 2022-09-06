@@ -7,31 +7,21 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private token: string ;
+  public isAuth;
   constructor(
     private router: Router,
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    if(!sessionStorage.getItem('token'))
-    {
-      this.router.navigate(['/login']);
-    }else{
-      this.token = sessionStorage.getItem('token')
-      // console.log(this.token);
-      this.authService.verifyToken(this.token).subscribe(
-        res=> {
-          if(!res.isValidToken){
-            this.router.navigate(['/login'])
-          }
-        },
-        err=> {
-          console.log(err);
-          this.router.navigate(['/login'])
-        }
-      )
-    }
+
+    this.isAuth = this.authService.isLoggedIn();
+
+    // if(!this.isAuth){
+    //   this.router.navigate(['/login'])
+    // }
+
+
   }
 
 }

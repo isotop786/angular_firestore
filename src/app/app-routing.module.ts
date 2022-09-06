@@ -9,8 +9,6 @@ import { PostsComponent } from './components/posts/posts.component';
 import { LoginComponent } from './components/auth/login/login.component';
 
 
-const token = sessionStorage.getItem('token');
-
 const routes: Routes = [
 
   {path:'', component: HomeComponent, canActivate:[AuthGuard]},
