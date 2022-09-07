@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl ,FormBuilder, Validators} from '@angular/forms';
 import { CustomValidators } from './CustomValidators';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +14,10 @@ export class ReactiveformComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+      private authService : AuthService,
+      private router : Router
+    ) {
 
     this.form = fb.group({
       firstName: ['',[Validators.required, Validators.minLength(3)]],
@@ -23,7 +28,6 @@ export class ReactiveformComponent implements OnInit {
     },
     {
       validators : CustomValidators.Mustmatch('password','confirmpassword')
-      // validators : CustomValidators.MatchValidator('password','confirmpassword')
 
     }
     )
@@ -43,8 +47,10 @@ export class ReactiveformComponent implements OnInit {
   onSubmit(){
     if(this.form.status !=='INVALID')
     {
-      console.log(this.form.value);
-      console.log(this.form.status);
+      // console.log(this.form.value);
+      this.authService.register(this.form.value).subscribe(res=>{
+        this.router.navigate(['/login'])
+      })
     }
 
   }

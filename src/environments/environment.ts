@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  rootURL:"http://nodejsbackend-maruf.herokuapp.com/auth/verify",
+  rootURL:"http://nodejsbackend-maruf.herokuapp.com/",
 };
 
 /*

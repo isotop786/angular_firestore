@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from '../modal/Token';
 import { TokenVerifyModel } from '../modal/TokenVerifyModel';
 import { Login } from '../modal/Login';
+import { RegisterModel } from '../modal/RegisterModel';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -41,6 +42,11 @@ export class AuthService {
 
   login(loginData : Login) : Observable<Login> {
     return this.http.post<Login>(this.url, loginData, httpOptions )
+  }
+
+  register(registerData: RegisterModel) : Observable<RegisterModel>
+  {
+    return this.http.post<RegisterModel>(environment.rootURL+'auth/signup/',registerData,httpOptions)
   }
 
 
