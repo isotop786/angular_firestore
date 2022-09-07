@@ -20,6 +20,7 @@ const httpOptions = {
 
 @Injectable()
 export class AuthService {
+  rootURL: string = "https://nodejsbackend-maruf.herokuapp.com/"
   url : string = "https://nodejsbackend-maruf.herokuapp.com/auth/signin";
   url_local : string = "http://localhost:5200/auth/signin";
   private URL: string ="http://nodejsbackend-maruf.herokuapp.com/auth/verify/auth/isauth/"
@@ -46,7 +47,7 @@ export class AuthService {
 
   register(registerData: RegisterModel) : Observable<RegisterModel>
   {
-    return this.http.post<RegisterModel>(environment.rootURL+'auth/signup/',registerData,httpOptions)
+    return this.http.post<RegisterModel>(this.rootURL+'auth/signup/',registerData,httpOptions)
   }
 
 
