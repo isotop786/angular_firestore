@@ -8,6 +8,7 @@ import { UsersComponent } from './components/users/users.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { ReactiveformComponent } from './components/reactiveform/reactiveform.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'users', component: UsersComponent, canActivate:[AuthGuard]},
   {path:'posts', component: PostsComponent, canActivate:[AuthGuard]},
   {path:'login', component: LoginComponent},
-  {path:'register', component: RegisterComponent},
+  {path:'register', component: ReactiveformComponent},
+  // {path:'form', component: ReactiveformComponent},
 ];
 
 

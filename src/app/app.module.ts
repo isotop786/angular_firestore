@@ -16,6 +16,9 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HeaderComponent } from './ngrx/cart-state-store/header/header.component';
+import { PasswordPatternDirective } from './directives/password-pattern.directive';
+import { ReactiveformComponent } from './components/reactiveform/reactiveform.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +32,15 @@ import { HeaderComponent } from './ngrx/cart-state-store/header/header.component
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
+    PasswordPatternDirective,
+    ReactiveformComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

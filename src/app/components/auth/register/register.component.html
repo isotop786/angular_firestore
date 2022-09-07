@@ -7,17 +7,23 @@
           <h5 style="font-weight:300;">Register a new account</h5>
         </div>
         <div class="card-body p-3">
-          <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <form #registerForm="ngForm" (ngSubmit)="register(registerForm)"
+
+          >
             <div class="form-group">
               <label for="firstName">First Name</label>
               <input type="text" name="firstName" id="firstName" class="form-control"
               [(ngModel)]="registerData.firstName"
               #firstName="ngModel"
               required
+              minlength="3"
               [ngClass]="{'is-invalid': firstName.errors && firstName.touched}"
               >
-              <div [hidden]="!firstName.errors" class="invalid-feedback">
+              <div [hidden]="!firstName.errors?.['required']" class="invalid-feedback">
                 First name is required
+              </div>
+              <div [hidden]="!firstName.errors?.['minlength']" class="invalid-feedback">
+                First name must be at least 3 characters
               </div>
             </div>
             <div class="form-group">
@@ -52,12 +58,37 @@
 
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" name="password" id="password" class="form-control">
+              <input type="password" name="password" id="password" class="form-control"
+              [(ngModel)]="registerData.password"
+              #password="ngModel"
+              required
+              minlength="6"
+              [ngClass]="{'is-invalid':password.errors && password.touched}"
+              >
+              <div [hidden]="!password.errors?.['required']" class="invalid-feedback">
+                Password is required
+              </div>
+              <div [hidden]="!password.errors?.['minlength']" class="invalid-feedback">
+                Password must be at least 6 characters
+              </div>
+              <div [hidden]="!password.errors?.['pattern']" class="invalid-feedback">
+                Password must be contain letters and numbers
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="confirm_password">Confirm Password</label>
-              <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
+              [(ngModel)]="registerData.confirm_password"
+              #confirmPassword ="ngModel"
+              required
+
+              [ngClass]="{'is-invalid':confirmPassword.errors && confirmPassword.touched}"
+              >
+              <!-- <div [hidden]="!confirm_password.errors" class="invalid-feedback">Confirm password is required</div> -->
+              <div class="invalid-feedback" [hidden]="!confirmPassword.errors['matching']">
+                Password did not match
+              </div>
             </div>
 
             <div>
