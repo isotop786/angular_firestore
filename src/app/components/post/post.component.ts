@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Post } from 'src/app/modal/Posts';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { PostService } from '../../services/post.service';
 
 @Component({
@@ -17,7 +16,6 @@ export class PostComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private location : Location
   ) { }
 
   ngOnInit(): void {

@@ -1,3 +1,4 @@
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'posts/:id', component:PostComponent},
   {path:'login', component: LoginComponent},
   {path:'register', component: ReactiveformComponent},
+  {path:'**', component:NotfoundComponent}
   // {path:'form', component: ReactiveformComponent},
 ];
 

@@ -19,6 +19,7 @@ import { HeaderComponent } from './ngrx/cart-state-store/header/header.component
 import { PasswordPatternDirective } from './directives/password-pattern.directive';
 import { ReactiveformComponent } from './components/reactiveform/reactiveform.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     PasswordPatternDirective,
     ReactiveformComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
