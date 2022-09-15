@@ -9,6 +9,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { ReactiveformComponent } from './components/reactiveform/reactiveform.component';
+import { PostComponent } from './components/post/post.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'', component: HomeComponent, canActivate:[AuthGuard]},
   {path:'users', component: UsersComponent, canActivate:[AuthGuard]},
   {path:'posts', component: PostsComponent, canActivate:[AuthGuard]},
+  {path:'posts/:id', component:PostComponent},
   {path:'login', component: LoginComponent},
   {path:'register', component: ReactiveformComponent},
   // {path:'form', component: ReactiveformComponent},

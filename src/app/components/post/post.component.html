@@ -1,13 +1,15 @@
+<div *ngIf="!post">
+  <div class="container">
+    <p>post is loading...</p>
+  </div>
+</div>
 
+<div *ngIf="post" class="container">
+<a routerLink="/posts" class="btn btn-danger my-3">Back</a>
       <div class="card card-default">
         <div class="card-body">
             <h4>{{post.title}}</h4>
             <p>{{post.body}}</p>
         </div>
-        <div class="card-footer">
-          <div class="d-flex justify-content-between">
-            <button (click)="editPost(post)" class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-            <button  class="btn btn-danger"><i class="fa fa-remove"></i></button>
-          </div>
-        </div>
       </div>
+    </div>

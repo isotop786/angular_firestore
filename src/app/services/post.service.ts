@@ -41,4 +41,9 @@ export class PostService {
     return this.http.delete<Post>(url, httpOption)
   }
 
+  getSinglePost(id :any): Observable<Post>
+  {
+    return this.http.get<Post>(this.postURL+id,httpOption)
+  }
+
 }
